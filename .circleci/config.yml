@@ -38,7 +38,10 @@ jobs:
              export ANSIBLE_HOST_KEY_CHECKING=False 
              apk add --update ansible 
              python -m pip install awscli
-             aws ec2 describe-instances \    --query ‘Reservations[*].Instances[*].PublicIpAddress’ \    --filters “Name=tag:Name,Values=firstone” \    > inventory
+             aws ec2 describe-instances \
+              --query 'Reservations[*].Instances[*].PublicIpAddress' \
+              --filters “Name=tag:Name,Values=firstone” \
+              --output text >> inventory
       
 
       - run:
