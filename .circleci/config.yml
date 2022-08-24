@@ -29,10 +29,17 @@ jobs:
       - add_ssh_keys:
               # You can get this ID in the section where you registered the SSH Key
               fingerprints: ["28:04:f7:b0:63:f9:0c:dd:fd:4e:48:20:bc:c2:b3:26"] 
+
+
+        
       - run:
           name: Install dependencies
           command: |
+             export ANSIBLE_HOST_KEY_CHECKING=False 
              apk add --update ansible 
+             python -m pip install awscli
+             aws ec2 describe-instances \    --query ‘Reservations[*].Instances[*].PublicIpAddress’ \    --filters “Name=tag:Name,Values=firstone” \    > inventory
+      
 
       - run:
           name: Run Playbook and Configure server
