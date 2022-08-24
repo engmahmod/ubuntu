@@ -40,7 +40,7 @@ jobs:
              python -m pip install awscli
              aws ec2 describe-instances \
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
-              --filters “Name=tag:Name,Values=firstone” \
+              --filters = Name=tag:Name,Values=firstone \
               --output text >> inventory
       
 
